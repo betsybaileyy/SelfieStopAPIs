@@ -1,0 +1,4 @@
+export DB_HOST='us-cdbr-iron-east-05.cleardb.net'
+export DB_NAME='heroku_1dc08f87959cf28'
+export DB_USER='b20e6999a4f605'
+export DB_PASS='10e51ba4'
