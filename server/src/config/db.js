@@ -1,32 +1,28 @@
 import mysql from 'mysql';
-let env = process.env;
-
-if (!env.DB_HOST) {
-    env = require('./config').default;
-}
+import config from '.';
 
 let pool = mysql.createPool({
     connectionLimit: 10,
-    host: env.DB_HOST,
-    user: env.DB_USER,
-    password: env.DB_PASS,
-    database: env.DB_NAME
+    host: config.env.DB_HOST,
+    user: config.env.DB_USER,
+    password: config.env.DB_PASS,
+    database: config.env.DB_NAME
 });
 
 function executeQuery(sql, args = []) {
     return getConnection()
-    .then((connection) => {
-        return new Promise((resolve, reject) => {
-            connection.query(sql, args, (err, result) => {
-                connection.release();
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(result);
-                }
+        .then((connection) => {
+            return new Promise((resolve, reject) => {
+                connection.query(sql, args, (err, result) => {
+                    connection.release();
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result);
+                    }
+                });
             });
         });
-    });
 }
 
 function callProcedure(procedureName, args = []) {
@@ -37,23 +33,23 @@ function callProcedure(procedureName, args = []) {
 
 function rows(procedureName, args = []) {
     return callProcedure(procedureName, args)
-    .then((resultsets) => {
-        return resultsets[0];
-    });
+        .then((resultsets) => {
+            return resultsets[0];
+        });
 }
 
 function row(procedureName, args = []) {
     return callProcedure(procedureName, args)
-    .then((resultsets) => {
-        return resultsets[0][0];
-    });
+        .then((resultsets) => {
+            return resultsets[0][0];
+        });
 }
 
 function empty(procedureName, args = []) {
     return callProcedure(procedureName, args)
-    .then(() => {
-        return;
-    });
+        .then(() => {
+            return;
+        });
 }
 
 function generatePlaceholders(args = []) {
