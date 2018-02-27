@@ -1,7 +1,8 @@
 import uuidv4 from 'uuid/v4';
 import { createCipher, createDecipher } from 'crypto';
+import config from '../config';
 const ALGORITHM = 'aes-256-ctr';
-const SECRET = 'aardvark';
+const SECRET = config.env.SECRET;
 
 function encode(value) {
     const cipher = createCipher(ALGORITHM, SECRET);

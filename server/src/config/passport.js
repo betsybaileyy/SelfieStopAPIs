@@ -48,6 +48,8 @@ function configurePassport(app) {
         let tokenId = decode(token);
         if (!tokenId) {
             return done(null, false, { message: 'Invalid token' });
+        } else {
+            console.log(err);
         }
         tokensTable.getOne(tokenId)
             .then((tokenRecord) => {
