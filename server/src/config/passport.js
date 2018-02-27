@@ -46,11 +46,11 @@ function configurePassport(app) {
 
     passport.use(new BearerStrategy((token, done) => {
         let tokenId = decode(token);
+
         if (!tokenId) {
             return done(null, false, { message: 'Invalid token' });
-        } else {
-            console.log(err);
         }
+
         tokensTable.getOne(tokenId)
             .then((tokenRecord) => {
                 return usersTable.getOne(tokenRecord.userid);
