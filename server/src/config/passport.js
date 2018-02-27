@@ -5,7 +5,7 @@ import Table from '../table';
 import { encode, decode } from '../utils/tokens';
 import { checkPassword } from '../utils/security';
 
-let authorsTable = new Table('authors');
+let usersTable = new Table('users');
 let tokensTable = new Table('tokens');
 
 function configurePassport(app) {
@@ -14,16 +14,16 @@ function configurePassport(app) {
         passwordField: 'password',
         session: false,
     }, (email, password, done) => {
-        authorsTable.find({ email })
+        usersTable.find({ email })
             .then((results) => results[0])
-            .then((author) => {
-                if (author && author.hash) {
-                    checkPassword(password, author.hash)
+            .then((user) => {
+                if (user && user.hash) {
+                    checkPassword(password, user.hash)
                         .then((matches) => {
                             if (matches === true) {
                                 // password is correct
                                 tokensTable.insert({
-                                    authorid: author.id
+                                    userid: user.id
                                 })
                                     .then((idObj) => encode(idObj.id))
                                     .then((token) => {
@@ -51,11 +51,11 @@ function configurePassport(app) {
         }
         tokensTable.getOne(tokenId)
             .then((tokenRecord) => {
-                return authorsTable.getOne(tokenRecord.authorid);
-            }).then((author) => {
-                if (author) {
-                    delete author.password;
-                    return done(null, author);
+                return usersTable.getOne(tokenRecord.userid);
+            }).then((user) => {
+                if (user) {
+                    delete user.password;
+                    return done(null, user);
                 } else {
                     return done(null, false, { message: 'Invalid token' });
                 }
