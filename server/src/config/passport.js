@@ -17,8 +17,8 @@ function configurePassport(app) {
         usersTable.find({ email })
             .then((results) => results[0])
             .then((user) => {
-                if (user && user.hash) {
-                    checkPassword(password, user.hash)
+                if (user && user.password) {
+                    checkPassword(password, user.password)
                         .then((matches) => {
                             if (matches === true) {
                                 // password is correct

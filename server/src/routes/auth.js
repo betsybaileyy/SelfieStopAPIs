@@ -32,24 +32,21 @@ router.post('/signup', upload.single('image'), (req, res, next) => {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,
-                hash: hash,
+                password: hash,
                 bio: req.body.bio,
                 image: req.file.path
             }
-
-            console.log(newUser);
-            //     users.insert(newUser)
-            //         .then(() => {
-            //             res.sendStatus(201);
-            //         }).catch((err) => {
-            //             console.log(err);
-            //         });
-            // }).catch((err) => {
-            //     next(err);
-            // });
+            users.insert(newUser)
+                .then(() => {
+                    res.sendStatus(201);
+                }).catch((err) => {
+                    console.log(err);
+                });
+        }).catch((err) => {
+            next(err);
         });
-
 });
+
 
 
 
