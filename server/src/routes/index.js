@@ -5,8 +5,10 @@ import AuthRouter from './auth';
 
 let router = Router();
 
-router.use('/imagesTest', ImagesTestRouter);
 router.use('/auth', AuthRouter);
+
+router.use('/imagesTest', ImagesTestRouter);
+
 router.use('/people', peopleRouter);
 
 export default router;
