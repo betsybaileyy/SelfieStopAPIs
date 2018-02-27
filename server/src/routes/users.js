@@ -13,6 +13,7 @@ router.post('/', upload.single('image'), (req, res, next) => {
     let post = {
         image: req.file.path,
         userid: req.user.id,
+        location: req.body.location
     }
 
     images.insert(post)
@@ -22,7 +23,5 @@ router.post('/', upload.single('image'), (req, res, next) => {
             console.log(err);
         });
 });
-
-
 
 export default router;
