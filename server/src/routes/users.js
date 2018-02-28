@@ -6,9 +6,10 @@ let upload = multer({ dest: 'client/img/' })
 let router = Router();
 
 let users = new Table('users');
+let images = new Table('images');
 
 router.get('/:id', (req, res) => {
-    let id = req.body.id;
+    let id = req.params.id;
 
     users.getOne(id)
         .then((user) => {
@@ -16,12 +17,12 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.get('/selfies', (req, res) => {
-    let id = req.body.id;
+router.get('/:id/selfies', (req, res) => {
+    let id = req.params.id;
 
     images.getAllUserImages(id)
-        .then((selfies) => {
-            res.json(selfies);
+        .then((images) => {
+            res.json(images);
         });
 });
 
