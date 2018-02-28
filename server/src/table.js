@@ -19,6 +19,11 @@ class Table {
         return executeQuery(sql);
     }
 
+    getAllLocations(type) {
+        let sql = `SELECT * FROM ${this.tableName} WHERE categoryid = ${type} ORDER BY _created DESC`;
+        return executeQuery(sql);
+    }
+
     find(query) {
         let columns = Object.keys(query);
         let values = Object.values(query);
