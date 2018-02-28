@@ -7,8 +7,8 @@ let upload = multer({ dest: 'client/img/' })
 let locations = new Table('locations');
 
 router.get('/:id?', (req, res) => {
-    let id = 41;
-    let type = 21;
+    let id = req.body.id;
+    let type = req.body.type;
 
     if (!id) {
         locations.getAllLocations(type)

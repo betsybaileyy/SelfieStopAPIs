@@ -14,23 +14,14 @@ router.get('/:id', (req, res) => {
         .then((user) => {
             res.json(user);
         });
-
 });
 
-router.post('/', upload.single('image'), (req, res, next) => {
-    console.log(req.user);
+router.get('/selfies', (req, res) => {
+    let id = req.body.id;
 
-    let post = {
-        image: req.file.path,
-        userid: req.user.id,
-        location: req.body.location
-    }
-
-    images.insert(post)
-        .then(() => {
-            res.sendStatus(201);
-        }).catch((err) => {
-            console.log(err);
+    images.getAllUserImages(id)
+        .then((selfies) => {
+            res.json(selfies);
         });
 });
 

@@ -24,6 +24,11 @@ class Table {
         return executeQuery(sql);
     }
 
+    getAllUserImages(id) {
+        let sql = `SELECT * FROM ${this.tableName} WHERE userid = ${id} ORDER BY _created DESC`;
+        return executeQuery(sql);
+    }
+
     find(query) {
         let columns = Object.keys(query);
         let values = Object.values(query);
