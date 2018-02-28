@@ -8,8 +8,6 @@ let router = Router();
 let imagesTest = new Table('imagesTest');
 
 router.post('/profile', upload.single('image'), (req, res, next) => {
-    console.log(req.file.path);
-    console.log(req.body);
     let post = {
         image: req.file.path
     }
