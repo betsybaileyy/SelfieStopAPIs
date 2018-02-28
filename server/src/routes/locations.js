@@ -24,4 +24,23 @@ router.get('/:id?', (req, res) => {
     }
 });
 
+router.post('/', upload.single('image'), (req, res, next) => {
+    console.log(req.user);
+
+    let post = {
+        image: req.file.path,
+        name: req.body.name,
+        description: req.body.description,
+        categoryid: req.body.categoryid,
+        address: req.body.address
+    }
+
+    locations.insert(post)
+        .then(() => {
+            res.sendStatus(201);
+        }).catch((err) => {
+            console.log(err);
+        });
+});
+
 export default router;
