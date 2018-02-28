@@ -5,7 +5,17 @@ let multer = require('multer');
 let upload = multer({ dest: 'client/img/' })
 let router = Router();
 
-let images = new Table('images');
+let users = new Table('users');
+
+router.get('/:id', (req, res) => {
+    let id = req.body.id;
+
+    users.getOne(id)
+        .then((user) => {
+            res.json(user);
+        });
+
+});
 
 router.post('/', upload.single('image'), (req, res, next) => {
     console.log(req.user);
