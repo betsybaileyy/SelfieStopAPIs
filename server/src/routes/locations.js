@@ -24,6 +24,8 @@ router.get('/:typeid/:id?', (req, res) => {
     }
 });
 
+
+
 router.post('/', upload.single('image'), (req, res, next) => {
     console.log(req.user);
 
