@@ -29,10 +29,10 @@ class Table {
         return executeQuery(sql);
     }
 
-    // getAllLocationImages(id) {
-    //     let sql = `SELECT * FROM ${this.tableName} WHERE locationName = ${id} ORDER BY _created DESC`;
-    //     return executeQuery(sql);
-    // }
+    getAllLocationImages(id) {
+        let sql = `SELECT * FROM ${this.tableName} WHERE locationid = ${id} ORDER BY _created DESC`;
+        return executeQuery(sql);
+    }
 
     find(query) {
         let columns = Object.keys(query);

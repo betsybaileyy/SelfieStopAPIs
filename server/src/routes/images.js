@@ -13,7 +13,7 @@ router.post('/', upload.single('image'), (req, res, next) => {
     let picture = {
         image: req.file.path,
         userid: req.user.id,
-        locationName: req.body.location
+        locationid: req.body.locationid
     }
 
     images.insert(picture)
@@ -22,6 +22,14 @@ router.post('/', upload.single('image'), (req, res, next) => {
         }).catch((err) => {
             console.log(err);
         });
+});
+
+router.get('/:id', (req, res) => {
+    let id = req.params.id;
+
+    images.getAllLocationImages(id)
+
+
 });
 
 export default router;
