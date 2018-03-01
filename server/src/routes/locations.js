@@ -6,12 +6,12 @@ let multer = require('multer');
 let upload = multer({ dest: 'client/img/' })
 let locations = new Table('locations');
 
-router.get('/:id?', (req, res) => {
-    let id = req.body.id;
-    let type = req.body.type;
+router.get('/:typeid/:id?', (req, res) => {
+    let id = req.params.id;
+    let typeid = req.params.typeid;
 
     if (!id) {
-        locations.getAllLocations(type)
+        locations.getAllLocations(typeid)
             .then((locations) => {
                 res.json(locations);
             });
