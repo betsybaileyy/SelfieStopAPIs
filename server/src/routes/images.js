@@ -28,8 +28,11 @@ router.get('/:id', (req, res) => {
     let id = req.params.id;
 
     images.getAllLocationImages(id)
-
-
+    .then((locationImages) => {
+        res.json(locationImages);
+    }).catch((err) => {
+        console.log(err);
+    });
 });
 
 export default router;
