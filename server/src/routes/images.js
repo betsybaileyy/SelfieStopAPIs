@@ -10,17 +10,19 @@ let locations = new Table('locations');
 
 router.post('/', upload.single('image'), (req, res, next) => {
     if (!req.body.locationid) {
-        let picture = {
-            image: req.file.path,
-            userid: req.user.id,
-            locationid: 141
-        }
-        images.insert(picture)
-            .then(() => {
-                res.sendStatus(201);
-            }).catch((err) => {
-                console.log(err);
-            });
+        console.log(req.body);
+        console.log(req.file.path);
+        // let picture = {
+        //     image: req.file.path,
+        //     userid: req.user.id,
+        //     locationid: 141
+        // }
+        // images.insert(picture)
+        //     .then(() => {
+        //         res.sendStatus(201);
+        //     }).catch((err) => {
+        //         console.log(err);
+        //     });
 
     } else {
         let picture = {
