@@ -8,7 +8,7 @@ class HelloWorld extends Component {
     }
 
     render() {
-        return <h1>Hello Covalence!</h1>;
+        return <h1>Hello World!</h1>;
     }
 }
 
