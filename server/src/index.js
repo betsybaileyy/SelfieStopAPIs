@@ -11,8 +11,8 @@ let app = express();
 app.use(express.urlencoded({ extended: false }));
 
 morgan.token('type', function (req, res) { return req.headers['content-type'] })
-app.use(morgan(':method :type :url :status :response-time ms - :res[content-length]'))
-// app.use(morgan('dev'));
+// app.use(morgan(':method :type :url :status :response-time ms - :res[content-length]'))
+app.use(morgan('dev'));
 app.use(express.static(CLIENT_PATH));
 app.use(express.json());
 
