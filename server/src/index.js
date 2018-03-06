@@ -8,8 +8,10 @@ import configurePassport from './config/passport';
 const CLIENT_PATH = join(__dirname, '../../client');
 
 let app = express();
+app.use(express.urlencoded({ extended: false }));
 
-app.use(morgan('dev'));
+morgan.token('type', function (req, res) { return req.headers['content-type'] })
+app.use(morgan(':method :type :url :status :response-time ms - :res[content-length]'))
 app.use(express.static(CLIENT_PATH));
 app.use(express.json());
 
