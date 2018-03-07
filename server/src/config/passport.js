@@ -45,6 +45,7 @@ function configurePassport(app) {
     }));
 
     passport.use(new BearerStrategy((token, done) => {
+        console.log('inside bearer');
         let tokenId = decode(token);
 
         if (!tokenId) {
@@ -55,6 +56,7 @@ function configurePassport(app) {
             .then((tokenRecord) => {
                 return usersTable.getOne(tokenRecord.userid);
             }).then((user) => {
+                console.log(user);
                 if (user) {
                     delete user.password;
                     return done(null, user);

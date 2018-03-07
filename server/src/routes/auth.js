@@ -15,6 +15,7 @@ let router = Router();
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', (err, token, info) => {
         console.log(token);
+
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -49,12 +50,5 @@ router.post('/signup', (req, res, next) => {
             next(err);
         });
 });
-
-// router.get('/me', tokenMiddleware, isLoggedIn, (req, res) => {
-//     res.json(req.user);
-// });
-
-
-
 
 export default router;
