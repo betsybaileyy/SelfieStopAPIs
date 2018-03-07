@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import Table from '../table';
+import { tokenMiddleware, isLoggedIn } from '../middleware/auth.mw';
 
 let multer = require('multer');
 let upload = multer({ dest: 'client/img/' })
@@ -8,9 +9,9 @@ let router = Router();
 let images = new Table('images');
 let locations = new Table('locations');
 
-router.post('/', upload.single('image'), (req, res, next) => {
+router.post('/', tokenMiddleware, isLoggedIn, upload.single('image'), (req, res, next) => {
     if (!req.body.locationid) {
-        console.log(req.user.id);
+        // console.log(req.user.id);
         console.log(req.file.path);
         // let picture = {
         //     image: req.file.path,
