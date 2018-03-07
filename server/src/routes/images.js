@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import Table from '../table';
-import { tokenMiddleware, isLoggedIn } from '../middleware/auth.mw';
 
 let multer = require('multer');
 let upload = multer({ dest: 'client/img/' })
@@ -12,19 +11,18 @@ let locations = new Table('locations');
 router.post('/', upload.single('image'), (req, res, next) => {
     console.log('Inside Images.js');
     if (!req.body.locationid) {
-        console.log(req.file.path);
-        res.sendStatus(201);
-        // let picture = {
-        //     image: req.file.path,
-        //     userid: req.user.id,
-        //     locationid: 141
-        // }
-        // images.insert(picture)
-        //     .then(() => {
-        //         res.sendStatus(201);
-        //     }).catch((err) => {
-        //         console.log(err);
-        //     });
+        let picture = {
+            image: req.file.path,
+            userid: req.user.id,
+            locationid: 141
+        }
+        images.insert(picture)
+            .then(() => {
+                res.sendStatus(201);
+            }).catch((err) => {
+                console.log(err);
+                res.sendStatus(500);
+            });
 
     } else {
         let picture = {
@@ -51,6 +49,7 @@ router.get('/:id', (req, res) => {
             res.json(locationImages);
         }).catch((err) => {
             console.log(err);
+            res.sendStatus(500);
         });
 });
 
