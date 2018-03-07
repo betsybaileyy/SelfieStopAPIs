@@ -56,7 +56,6 @@ function configurePassport(app) {
             .then((tokenRecord) => {
                 return usersTable.getOne(tokenRecord.userid);
             }).then((user) => {
-                console.log(user);
                 if (user) {
                     delete user.password;
                     return done(null, user);
