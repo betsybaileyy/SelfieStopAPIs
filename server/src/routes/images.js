@@ -9,10 +9,11 @@ let router = Router();
 let images = new Table('images');
 let locations = new Table('locations');
 
-router.post('/', tokenMiddleware, isLoggedIn, upload.single('image'), (req, res, next) => {
+router.post('/', upload.single('image'), (req, res, next) => {
+    console.log('Inside Images.js');
     if (!req.body.locationid) {
-        // console.log(req.user.id);
         console.log(req.file.path);
+        res.sendStatus(201);
         // let picture = {
         //     image: req.file.path,
         //     userid: req.user.id,
