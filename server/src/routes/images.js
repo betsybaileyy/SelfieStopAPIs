@@ -9,6 +9,7 @@ let images = new Table('images');
 let locations = new Table('locations');
 
 router.post('/', upload.single('image'), (req, res, next) => {
+    console.log('Inside Images.js');
     if (!req.body.locationid) {
         let picture = {
             image: req.file.path,
@@ -21,6 +22,7 @@ router.post('/', upload.single('image'), (req, res, next) => {
                 res.sendStatus(201);
             }).catch((err) => {
                 console.log(err);
+                res.sendStatus(500);
             });
 
     } else {
@@ -35,6 +37,7 @@ router.post('/', upload.single('image'), (req, res, next) => {
                 res.sendStatus(201);
             }).catch((err) => {
                 console.log(err);
+                res.sendStatus(500);
             });
     }
 });
@@ -47,6 +50,7 @@ router.get('/:id', (req, res) => {
             res.json(locationImages);
         }).catch((err) => {
             console.log(err);
+            res.sendStatus(500);
         });
 });
 
