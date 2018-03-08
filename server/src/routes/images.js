@@ -15,6 +15,7 @@ router.post('/', upload.single('image'), (req, res, next) => {
             userid: req.user.id,
             locationid: 141
         }
+
         images.insert(picture)
             .then(() => {
                 res.sendStatus(201);
