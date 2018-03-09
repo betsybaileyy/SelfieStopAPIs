@@ -14,8 +14,6 @@ let router = Router();
 AWS.config.update(params);
 let s3 = new AWS.S3();
 
-
-
 let upload = multer({
     storage: multerS3({
         s3: s3,
@@ -27,7 +25,7 @@ let upload = multer({
     })
 })
 
-router.post('/', upload.single('image'), (req, res, next) => {
+router.post('/id', upload.single('image'), (req, res, next) => {
     console.log(req.file.location);
     if (!req.body.locationid) {
         let picture = {
