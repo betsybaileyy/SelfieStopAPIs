@@ -66,8 +66,8 @@ router.get('/:id?', (req, res) => {
 
     if (!id) {
         images.getAll() // GETS all images from database. Displays from newest to oldest.
-            .then((locationImages) => {
-                res.json(locationImages);
+            .then((images) => {
+                res.json(images);
             }).catch((err) => {
                 console.log(err);
                 res.sendStatus(500);

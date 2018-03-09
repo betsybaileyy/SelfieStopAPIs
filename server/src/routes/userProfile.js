@@ -25,4 +25,18 @@ router.get('/:id/selfies', (req, res) => {
         });
 });
 
+router.put('/id', (req, res) => {
+    let id = req.params.id;
+    let row = req.body.image;
+
+    users.update(id, row)
+        .then((newImage) => {
+            console.log('Successful update!');
+            res.sendStatus(201);
+        }).catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+});
+
 export default router;
