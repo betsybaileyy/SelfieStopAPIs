@@ -25,7 +25,7 @@ let upload = multer({
     })
 })
 
-router.post('/id', upload.single('image'), (req, res, next) => {
+router.post('/', upload.single('image'), (req, res, next) => {
     console.log(req.file.location);
     if (!req.body.locationid) {
         let picture = {
