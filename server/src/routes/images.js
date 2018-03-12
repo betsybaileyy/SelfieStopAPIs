@@ -27,6 +27,7 @@ let upload = multer({
 
 router.post('/', upload.single('image'), (req, res, next) => {  // Sends image to S3
     console.log(req.file.location);
+    console.log(req.body.locationid);
     if (!req.body.locationid) {
         let picture = {
             image: req.file.location,
