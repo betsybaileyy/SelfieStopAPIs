@@ -2,5 +2,5 @@ node_modules
 client/dist
 server/lib
 server/src/config/config.js
-server/src/config/s3config.json
+server/src/config/s3config.js
 ENV_VAR

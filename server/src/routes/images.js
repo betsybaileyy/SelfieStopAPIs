@@ -25,7 +25,7 @@ let upload = multer({
     })
 })
 
-router.post('/', upload.single('image'), (req, res, next) => {
+router.post('/', upload.single('image'), (req, res, next) => {  // Sends image to S3
     console.log(req.file.location);
     if (!req.body.locationid) {
         let picture = {
@@ -33,7 +33,7 @@ router.post('/', upload.single('image'), (req, res, next) => {
             userid: req.user.id,
             locationid: 141
         }
-        images.insert(picture)
+        images.insert(picture) // Sends S3 image path to database
             .then(() => {
                 console.log('Insert Successful');
                 res.sendStatus(201);
