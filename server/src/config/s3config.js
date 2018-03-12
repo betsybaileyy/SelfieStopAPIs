@@ -1,7 +1,7 @@
 
 const params = {
-    secretAccessKey: 'n6/f3uCEz/PM38CjDx5xobBHZ1QU+vOAOU8NPyo8',
-    accessKeyId: 'AKIAJV6NLMKQ5ZIPE3JQ',
+    secretAccessKey: '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',
+    accessKeyId: 'AKIAIGBWRK66SZVBVHCQ',
     region: 'us-east-2'
 }
 
