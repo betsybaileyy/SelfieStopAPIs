@@ -1,12 +1,12 @@
 import mysql from 'mysql';
-import { dbParams } from '.'; //config
+import { dbConfig } from '.'; //config
 
 let pool = mysql.createPool({
     connectionLimit: 10,
-    host: dbParams.env.DB_HOST,
-    user: dbParams.env.DB_USER,
-    password: dbParams.env.DB_PASS,
-    database: dbParams.env.DB_NAME
+    host: dbConfig.DB_HOST,
+    user: dbConfig.DB_USER,
+    password: dbConfig.DB_PASS,
+    database: dbConfig.DB_NAME
 });
 
 function executeQuery(sql, args = []) {
@@ -16,6 +16,7 @@ function executeQuery(sql, args = []) {
                 connection.query(sql, args, (err, result) => {
                     connection.release();
                     if (err) {
+                        console.log('nah');
                         reject(err);
                     } else {
                         resolve(result);

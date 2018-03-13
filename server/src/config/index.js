@@ -1,9 +1,15 @@
-let env = process.env;
+let dbConfig = process.env;
+let s3Config = process.env;
 
-if (!env.DB_HOST) {
-    env = require('./config').default;
+import { dbParams, s3Params } from './config';
+
+
+if (!dbConfig.DB_HOST) {
+    dbConfig = dbParams; //require('./config').default;
 }
 
-export default {
-    env,
-};
+if (!s3Config.region) {
+    s3Config = s3Params; //require('./config').default;
+}
+
+export { dbConfig, s3Config };
