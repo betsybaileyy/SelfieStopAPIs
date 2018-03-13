@@ -3,7 +3,7 @@ import Table from '../table';
 import AWS from 'aws-sdk';
 import multerS3 from 'multer-s3';
 import multer from 'multer';
-import { s3Params } from '../config/config';
+import { s3Config } from '../config/';
 import { join } from 'path';
 
 
@@ -11,7 +11,7 @@ let images = new Table('images');
 let locations = new Table('locations');
 let router = Router();
 
-AWS.config.update(s3Params);
+AWS.config.update(s3Config);
 let s3 = new AWS.S3();
 
 let upload = multer({
