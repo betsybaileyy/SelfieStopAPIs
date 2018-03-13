@@ -1,12 +1,12 @@
 import mysql from 'mysql';
-import config from '.';
+import { dbParams } from '.'; //config
 
 let pool = mysql.createPool({
     connectionLimit: 10,
-    host: config.env.DB_HOST,
-    user: config.env.DB_USER,
-    password: config.env.DB_PASS,
-    database: config.env.DB_NAME
+    host: dbParams.env.DB_HOST,
+    user: dbParams.env.DB_USER,
+    password: dbParams.env.DB_PASS,
+    database: dbParams.env.DB_NAME
 });
 
 function executeQuery(sql, args = []) {
