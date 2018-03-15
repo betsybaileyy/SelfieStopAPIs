@@ -46,6 +46,7 @@ function configurePassport(app) {
 
     passport.use(new BearerStrategy((token, done) => {
         console.log('inside bearer');
+        console.log(token);
         let tokenId = decode(token);
 
         if (!tokenId) {

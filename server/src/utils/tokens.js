@@ -1,6 +1,6 @@
 import uuidv4 from 'uuid/v4';
 import { createCipher, createDecipher } from 'crypto';
-import { dbConfig } from '../config';
+import dbConfig from '../config';
 const ALGORITHM = 'aes-256-ctr';
 const SECRET = dbConfig.SECRET;
 
