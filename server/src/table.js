@@ -19,6 +19,12 @@ class Table {
         return executeQuery(sql);
     }
 
+    getAllCarousel() {
+        let sql = `SELECT * FROM ${this.tableName} WHERE id = 41 OR id = 131 OR id = 121 OR id = 191 OR id = 81 OR id = 61 ORDER BY _created DESC`;
+        return executeQuery(sql);
+        // 131, 41, 81, 191, 121,61
+    }
+
     getAllLocations(type) {
         let sql = `SELECT * FROM ${this.tableName} WHERE categoryid = ${type} ORDER BY _created DESC`;
         return executeQuery(sql);
