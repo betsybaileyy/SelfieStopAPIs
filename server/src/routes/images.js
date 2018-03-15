@@ -3,7 +3,7 @@ import Table from '../table';
 import AWS from 'aws-sdk';
 import multerS3 from 'multer-s3';
 import multer from 'multer';
-import { s3Config } from '../config/';
+import s3Config from '../config';
 import { join } from 'path';
 
 
@@ -19,6 +19,7 @@ let upload = multer({
         s3: s3,
         bucket: 'selfiestopimages',
         contentType: multerS3.AUTO_CONTENT_TYPE,
+        cacheControl: 'max-age=31536000',
         key: function (req, file, cb) {
             cb(null, Date.now() + '.jpg')
         }
@@ -45,7 +46,7 @@ router.post('/', upload.single('image'), (req, res, next) => {  // Sends image t
 
     } else {
         let picture = {
-            image: req.file.path,
+            image: req.file.location,
             userid: req.user.id,
             locationid: req.body.locationid
         }
@@ -60,7 +61,7 @@ router.post('/', upload.single('image'), (req, res, next) => {  // Sends image t
     }
 });
 
-router.get('/:id?', (req, res) => {
+router.get('/', (req, res) => {
     let id = req.params.id;
 
     if (!id) {
@@ -71,15 +72,21 @@ router.get('/:id?', (req, res) => {
                 console.log(err);
                 res.sendStatus(500);
             });
-    } else {
-        images.getAllLocationImages(id) // GETS all images from a specific category
-            .then((locationImages) => {
-                res.json(locationImages);
-            }).catch((err) => {
-                console.log(err);
-                res.sendStatus(500);
-            });
     }
+});
+
+router.get('/:id/locationImages', (req, res) => {
+    console.log(req.params.id);
+    let id = req.params.id;
+    images.getAllLocationImages(id) // GETS all images from a specific location.
+        .then((images) => {
+            console.log('Sent images');
+            res.json(images);
+        }).catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+
 });
 
 export default router;

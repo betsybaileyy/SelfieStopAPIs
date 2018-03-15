@@ -1,5 +1,5 @@
 import mysql from 'mysql';
-import { dbConfig } from '.'; //config
+import dbConfig from '.'; //config
 
 let pool = mysql.createPool({
     connectionLimit: 10,
