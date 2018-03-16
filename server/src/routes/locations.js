@@ -7,7 +7,7 @@ let upload = multer({ dest: 'client/img/' })
 let locations = new Table('locations');
 
 router.get('/', (req, res) => {
-    locations.getAllCarousel()
+    locations.getAll()
         .then((locations) => {
             res.json(locations);
         }).catch((err) => {
