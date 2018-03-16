@@ -2,4 +2,7 @@ node_modules
 client/dist
 server/lib
 server/src/config/config.js
+server/src/config/s3config.js
+server/src/config/test.txt
 ENV_VAR
+git-filter.sh

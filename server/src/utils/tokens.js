@@ -1,8 +1,8 @@
 import uuidv4 from 'uuid/v4';
 import { createCipher, createDecipher } from 'crypto';
-import config from '../config';
+import dbConfig from '../config';
 const ALGORITHM = 'aes-256-ctr';
-const SECRET = config.env.SECRET;
+const SECRET = dbConfig.SECRET;
 
 function encode(value) {
     const cipher = createCipher(ALGORITHM, SECRET);
