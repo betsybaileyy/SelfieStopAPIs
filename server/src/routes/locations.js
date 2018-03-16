@@ -24,6 +24,7 @@ router.get('/:typeid/:id?', (req, res) => {
         locations.getAllLocations(typeid)
             .then((locations) => {
                 res.json(locations);
+                console.log();
             });
 
     } else {
